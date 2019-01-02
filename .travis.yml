@@ -1,3 +1,18 @@
 language: python
 
-python: "3.6"
+python: 
+  - "3.6"
+  - "3.7"
+
+cache: pip
+
+install:
+  - pip install --upgrade pip
+  - pip install codecov
+  - pip install requirements.txt
+
+script:
+  - coverage run --source app/tests/v1 -m pytest -v
+after_success:
+  - codecov --token=8b1c7fba-96fd-4584-82f7-378973c9e4c6
+  - coveralls
