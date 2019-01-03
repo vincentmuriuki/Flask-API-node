@@ -2,10 +2,9 @@
 import unittest
 import json
 import sys
-
+sys.path.append("..")
 # Local imports
-# from api.v1 import *
-from .api.v1 import create_app
+from app.api.v1 import create_app
 
 class TestOrders(unittest.TestCase):
     def setUp(self):

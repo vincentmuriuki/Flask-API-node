@@ -9,7 +9,7 @@ cache: pip
 install:
   - pip install --upgrade pip
   - pip install codecov
-  - pip install requirements.txt
+  - pip install -r requirements.txt
 
 script:
   - coverage run --source app/tests/v1 -m pytest -v
