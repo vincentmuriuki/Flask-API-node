@@ -54,7 +54,15 @@ class SingleOrder(Resource):
         )
 
     def put(self, id):
-        pass
+        order = self.ops.getsingle(id)
+        if order:
+            order.status = "Delivered"
+            return make_response(
+                jsonify({
+                    'message': 'Order updated!',
+                    'order' : order
+                })
+            )
 
     def delete(self, id):
         pass
