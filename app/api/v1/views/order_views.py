@@ -21,15 +21,27 @@ class OrdersViews(Resource, OrdersOps):
             ), 201
         )
 
-#     def post(self):
-#         pass
+    def post(self):
+        data = request.get_json()
+        name = data['name']
+        price = data['price']
+        quantity = data['quantity']
 
-# class SingleOrder(Resource):
-#     def get(self, id):
-#         pass
+        response = self.ops.save(name, price, quantity)
+        return make_response(
+            jsonify(
+                {
+                    'Status': 'Pending',
+                    'message': 'Order Posted!',
+                    'Order Details': response
+        }))
 
-#     def put(self, id):
-#         pass
+class SingleOrder(Resource):
+    def get(self, id):
+        pass
 
-#     def delete(self, id):
-#         pass
+    def put(self, id):
+        pass
+
+    def delete(self, id):
+        pass

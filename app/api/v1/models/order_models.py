@@ -12,7 +12,7 @@ class OrdersOps():
             'Price': price,
             'Quantity': quantity
         }
-        self.orers.append(order_parts)
+        self.orders.append(order_parts)
 
         return self.orders
 
