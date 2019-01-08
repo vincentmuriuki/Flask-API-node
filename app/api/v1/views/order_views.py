@@ -37,8 +37,21 @@ class OrdersViews(Resource, OrdersOps):
         }))
 
 class SingleOrder(Resource):
+
+    def __init__(self):
+        self.ops = OrdersOps()
+
     def get(self, id):
-        pass
+        order = self.ops.getsingle(id)
+        return make_response(
+            jsonify(
+                {
+                    'Status': 'Ok',
+                    'message': 'Order details',
+                    'Orders' : order
+                }
+            )
+        )
 
     def put(self, id):
         pass

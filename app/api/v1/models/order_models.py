@@ -19,9 +19,9 @@ class OrdersOps():
     def getall(self):
         return self.orders
 
-    def getsingle(self):
+    def getsingle(self, id):
         for order in self.orders:
             if (order['id'] == id):
-                return order
+                return orders
 
-            return "Order not found!"
+            # return "Order not found!"
