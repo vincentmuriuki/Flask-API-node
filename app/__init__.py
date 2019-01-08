@@ -2,7 +2,7 @@
 # libraies
 from flask import Blueprint, Flask
 # local
-from ..instance.config import config
+# from ..instance.config import config
 
 def create_app():
     app = Flask(__name__)
