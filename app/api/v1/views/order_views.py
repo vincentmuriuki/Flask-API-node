@@ -65,4 +65,18 @@ class SingleOrder(Resource):
             )
 
     def delete(self, id):
-        pass
+        order = self.ops.getsingle(id)
+        if not order:
+            return make_response(
+                jsonify({
+                    'message': 'Order not found!'
+                })
+            ), 404
+
+        orders.remove(order)
+
+        return make_response(
+            jsonify({
+                'message': 'Order deleted!'
+            })
+        )
