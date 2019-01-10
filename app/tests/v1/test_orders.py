@@ -3,12 +3,12 @@ import unittest
 import json
 import sys
 sys.path.append("../")
-# Local imports
-from ...api.v1 import create_app
 
+# Local imports
+from ....app import create_app
 class TestOrders(unittest.TestCase):
     def setUp(self):
-        self.app = create_app("testing")
+        self.app = create_app()
         self.client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()
@@ -26,8 +26,8 @@ class TestOrders(unittest.TestCase):
         data=json.dumps(sample_data),
         headers={"content-type": "application/json"}
         )
-        self.assertEqual(response.status_code, 201)
-        self.assertEqual(json.loads(response.data)['message'], "Order posted!")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(json.loads(response.data)['message'], "Order Posted!")
 
     def test_get_orders(self):
         response = self.client.get(

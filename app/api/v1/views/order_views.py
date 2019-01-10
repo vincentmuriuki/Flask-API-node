@@ -18,7 +18,7 @@ class OrdersViews(Resource, OrdersOps):
                     'Status': 'Ok',
                     'Orders': orders
                 }
-            ), 201
+            ), 200
         )
 
     def post(self):
@@ -43,14 +43,20 @@ class SingleOrder(Resource):
 
     def get(self, id):
         order = self.ops.getsingle(id)
-        return make_response(
-            jsonify(
-                {
-                    'Status': 'Ok',
-                    'message': 'Order details',
-                    'Orders' : order
-                }
+        if order:
+            return make_response(
+                jsonify(
+                    {
+                        'Status': 'Ok',
+                        'message': 'Order details',
+                        'Orders' : order
+                    }
+                )
             )
+        return make_response(
+            jsonify({
+            "message": "Order not found!"
+        })
         )
 
     def put(self, id):
@@ -69,7 +75,7 @@ class SingleOrder(Resource):
         if not order:
             return make_response(
                 jsonify({
-                    'message': 'Order not found!'
+                    'message': 'Order Not found!'
                 })
             ), 404
 
@@ -78,5 +84,5 @@ class SingleOrder(Resource):
         return make_response(
             jsonify({
                 'message': 'Order deleted!'
-            })
+            }), 200
         )
