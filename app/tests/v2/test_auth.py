@@ -3,7 +3,7 @@ import unittest
 from ....app import create_app
 import json
 from ....instance import config
-# from ...api.v2 import DbConnection
+from ...api.v2.db.conn import init_test_database
 
 class TestAuth(unittest.TestCase):
     def setUp(self):
@@ -11,7 +11,7 @@ class TestAuth(unittest.TestCase):
         self.client = self.app.test_client()
         self.app_context = self.app.app_context()
         self.app_context.push()
-        # self.db = DbConnection()
+        self.db = init_test_database()
 
     def tearDown(self):
         self.app_context.pop()

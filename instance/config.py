@@ -32,7 +32,7 @@ class ReleaseConfig(Config):
     TESTING = False
     DEBUG = False
 
-config = {
+config_settings = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,
     'production': ProductionConfig,
