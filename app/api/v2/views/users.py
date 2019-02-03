@@ -5,6 +5,8 @@ from flask import jsonify, make_response, request
 from ..validators.validators import Validators
 import jwt
 import os
+import datetime as dt
+import json
 
 from werkzeug.security import generate_password_hash, check_password_hash
 auth_mod = AuthModels()
@@ -82,12 +84,12 @@ class Login(Resource):
 				token = jwt.JWT.encode(
 					{
 						"usr_id": usr_id,
-						"expiry": dt.datetime.utcnow() + dt.timedelta(minutes=1)},
+						"expiry": dt.datetime.utcnow() + dt.timedelta(minutes=1),},
 						os.getenv("SECRET_KEY"), 
 						algorithm="HS256"
 					
 				)
-				print(jwt.decode(token, os.getenv("SECRET_KEY"), algorithms=['HS256']))
+				print(jwt.JWT.decode(token, os.getenv("SECRET_KEY"), algorithms=['HS256']))
 
 				return (
 					{

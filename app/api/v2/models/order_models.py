@@ -39,3 +39,26 @@ class OrderModels():
         curr.execute("SELECT * from orders")
         orders = curr.fetchall()
         return orders
+
+    def fetchone(self, id):
+        curr = self.conn.cursor()
+        curr.execute("SELECT * FROM orders WHERE id='%s'" % id)
+        order = curr.fetchone()
+        return order
+
+
+    def updateorderstatus(self, id, status):
+        curr = self.conn.cursor()
+        curr.execute(" UPDATE orders SET status = 'Delivered' WHERE id = '%s'" %s)
+        self.conn.commit()
+        curr.close()
+        return status
+
+
+    def delete_order(self, id):
+        curr = self.conn.cursor()
+        curr.execute("DELETE FROM orders WHERE id='%s'" % id)
+        curr.close()
+        return {
+            'Message': 'Deleted!'
+        }

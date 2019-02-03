@@ -1,8 +1,8 @@
-from flask_restful import Resource
+from flask_restful import Resource, reqparse
 from flask import make_response, jsonify, request
 from ..models.order_models import OrderModels
 from ..jwt_auth.jwt_auth import token_required
-
+# from flask_restful import reqparse, 
 order_mod = OrderModels()
 
 class Main(Resource):
@@ -33,7 +33,7 @@ class OrdersDl(Resource):
 				'Order ID': id[0]
 				}
 			)
-	@token_required
+	# @token_required
 	def get(self):
 		orders = order_mod.get_all_orders()
 		return make_response(
@@ -45,4 +45,27 @@ class OrdersDl(Resource):
 			)
 		)
 
-		
+class IndividualOrders(Resource):
+	def get(self, id):
+		order = order_mod.fetchone(id)
+		return make_response( jsonify(
+			{
+				'Order': order
+			}
+		))
+
+	def put(self, id):
+		parser = reqparse.RequestParser()
+		parser.add_argument('status', type=str, required=True, help="Required!")
+		args = parser.parse_args()
+		print(args)
+		status = args['status']
+		order = order_mod.updateorderstatus(status, id)
+		return jsonify({
+			'Order': order
+		})
+
+
+	def delete(self, id):
+		order = order_mod.delete_order(id)
+		return order
